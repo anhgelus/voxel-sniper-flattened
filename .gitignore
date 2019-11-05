@@ -1,6 +1,8 @@
-.idea/
 .gradle/
+.idea/
 build/
 out/
+server/
+server.sh
 *.iml
 .gradletasknamecache

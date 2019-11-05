@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import com.thevoxelbox.voxelsniper.VoxelSniperPlugin;
 import com.thevoxelbox.voxelsniper.brush.Brush;
 import com.thevoxelbox.voxelsniper.brush.BrushRegistry;
-import com.thevoxelbox.voxelsniper.brush.PerformerBrush;
 import com.thevoxelbox.voxelsniper.brush.property.BrushProperties;
 import com.thevoxelbox.voxelsniper.command.CommandExecutor;
 import com.thevoxelbox.voxelsniper.command.TabCompleter;
@@ -87,33 +86,11 @@ public class BrushExecutor implements CommandExecutor, TabCompleter {
 		Brush brush = toolkit.useBrush(newBrush);
 		if (arguments.length > 1) {
 			Snipe snipe = new Snipe(sniper, toolkit, toolkitProperties, newBrush, brush);
-			if (brush instanceof PerformerBrush) {
-				String[] parameters = Arrays.copyOfRange(arguments, 1, arguments.length);
-				PerformerBrush performerBrush = (PerformerBrush) brush;
-				performerBrush.handleCommand(parameters, snipe);
-			} else {
-				String[] parameters = hackTheArray(Arrays.copyOfRange(arguments, 1, arguments.length));
-				brush.handleCommand(parameters, snipe);
-			}
+			String[] parameters = Arrays.copyOfRange(arguments, 1, arguments.length);
+			brush.handleCommand(parameters, snipe);
 			return;
 		}
 		sniper.sendInfo(sender);
-	}
-
-	/**
-	 * Padds an empty String to the front of the array.
-	 *
-	 * @param args Array to pad empty string in front of
-	 * @return padded array
-	 */
-	private String[] hackTheArray(String[] args) {
-		String[] returnValue = new String[args.length + 1];
-		returnValue[0] = "";
-		for (int i = 0, argsLength = args.length; i < argsLength; i++) {
-			String arg = args[i];
-			returnValue[i + 1] = arg;
-		}
-		return returnValue;
 	}
 
 	@Override
