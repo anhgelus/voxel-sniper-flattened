@@ -8,5 +8,5 @@ The purpose of this fork was to add Voxel Sniper to our building server, which r
 
 ## Download
 
-* [voxel-sniper-flattened](https://github.com/mcparkournet/voxel-sniper-flattened/releases/download/v1.0.3/voxel-sniper-flattened-1.0.3-all.jar) - only for the latest version of Java and Paper
-* **[voxel-sniper-flattened-backward](https://github.com/mcparkournet/voxel-sniper-flattened/releases/download/v1.0.3-backward/voxel-sniper-flattened-1.0.3-backward.jar)** - for **Java 8+** and **Spigot 1.13.2+**
+* [voxel-sniper-flattened](https://github.com/mcparkournet/voxel-sniper-flattened/releases/download/v1.0.4/voxel-sniper-flattened-1.0.4-all.jar) - only for the latest version of Java and Paper
+* **[voxel-sniper-flattened-backward](https://github.com/mcparkournet/voxel-sniper-flattened/releases/download/v1.0.4-backward/voxel-sniper-flattened-1.0.4-backward.jar)** - for **Java 8+** and **Spigot 1.13.2+**
