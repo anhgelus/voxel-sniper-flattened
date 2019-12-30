@@ -5,7 +5,7 @@ import net.mcparkour.common.math.vector.Vector3i;
 public final class Painters {
 
 	private Painters() {
-		throw new UnsupportedOperationException("Cannot create instance of utility class");
+		throw new UnsupportedOperationException("Cannot create an instance of this class");
 	}
 
 	public static SpherePainter sphere() {
