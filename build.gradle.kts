@@ -2,8 +2,8 @@ import net.mcparkour.migle.attributes.ApiVersion
 
 plugins {
 	java
-	id("net.mcparkour.migle.migle-bukkit") version "1.1.0"
-	id("com.github.johnrengelman.shadow") version "5.1.0"
+	id("net.mcparkour.migle.migle-bukkit") version "1.1.1"
+	id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
 java {
@@ -22,16 +22,16 @@ repositories {
 }
 
 dependencies {
-	implementation("net.mcparkour:common-math:1.0.0")
-	implementation("net.mcparkour:common-text:1.0.0")
-	compileOnly("com.destroystokyo.paper:paper-api:1.14.4-R0.1-SNAPSHOT")
-	compileOnly("org.jetbrains:annotations:17.0.0")
+	implementation("net.mcparkour:common-math:1.0.3")
+	implementation("net.mcparkour:common-text:1.0.3")
+	compileOnly("com.destroystokyo.paper:paper-api:1.15.1-R0.1-SNAPSHOT")
+	compileOnly("org.jetbrains:annotations:18.0.0")
 }
 
 migleBukkit {
 	main = "com.thevoxelbox.voxelsniper.VoxelSniperPlugin"
 	name = "VoxelSniper"
-	apiVersion = ApiVersion.VERSION_1_14
+	apiVersion = ApiVersion.VERSION_1_15
 	authors = listOf("przerwap", "MikeMatrix", "Gavjenks", "giltwist", "psanker", "Deamon5550", "DivineRage", "pitcer", "jaqobb")
 	website = "https://github.com/mcparkournet/voxel-sniper-flattened"
 	softDepend = listOf("VoxelModPackPlugin")
