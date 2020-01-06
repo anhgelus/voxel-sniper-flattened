@@ -24,6 +24,7 @@ repositories {
 dependencies {
 	implementation("net.mcparkour:common-math:1.0.3")
 	implementation("net.mcparkour:common-text:1.0.3")
+	implementation("net.mcparkour:craftmon-paper:1.0.0")
 	compileOnly("com.destroystokyo.paper:paper-api:1.15.1-R0.1-SNAPSHOT")
 	compileOnly("org.jetbrains:annotations:18.0.0")
 }
