@@ -5,14 +5,14 @@ import org.jetbrains.annotations.Nullable;
 
 public enum ToolAction {
 
-	ARROW,
-	GUNPOWDER;
+    ARROW,
+    GUNPOWDER;
 
-	@Nullable
-	public static ToolAction getToolAction(String name) {
-		return Arrays.stream(values())
-			.filter(toolAction -> name.equalsIgnoreCase(toolAction.name()))
-			.findFirst()
-			.orElse(null);
-	}
+    @Nullable
+    public static ToolAction getToolAction(final String name) {
+        return Arrays.stream(values())
+            .filter(toolAction -> name.equalsIgnoreCase(toolAction.name()))
+            .findFirst()
+            .orElse(null);
+    }
 }

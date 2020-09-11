@@ -10,31 +10,31 @@ import org.bukkit.block.data.BlockData;
 
 public class InkMaterialNoPhysicsPerformer extends AbstractPerformer {
 
-	private BlockData blockData;
-	private Material replaceMaterial;
+    private BlockData blockData;
+    private Material replaceMaterial;
 
-	@Override
-	public void initialize(PerformerSnipe snipe) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		this.blockData = toolkitProperties.getBlockData();
-		this.replaceMaterial = toolkitProperties.getReplaceBlockType();
-	}
+    @Override
+    public void initialize(final PerformerSnipe snipe) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        this.blockData = toolkitProperties.getBlockData();
+        this.replaceMaterial = toolkitProperties.getReplaceBlockType();
+    }
 
-	@Override
-	public void perform(Block block) {
-		if (block.getType() == this.replaceMaterial) {
-			Undo undo = getUndo();
-			undo.put(block);
-			block.setBlockData(this.blockData, false);
-		}
-	}
+    @Override
+    public void perform(final Block block) {
+        if (block.getType() == this.replaceMaterial) {
+            Undo undo = getUndo();
+            undo.put(block);
+            block.setBlockData(this.blockData, false);
+        }
+    }
 
-	@Override
-	public void sendInfo(PerformerSnipe snipe) {
-		snipe.createMessageSender()
-			.performerNameMessage()
-			.blockDataMessage()
-			.replaceBlockTypeMessage()
-			.send();
-	}
+    @Override
+    public void sendInfo(final PerformerSnipe snipe) {
+        snipe.createMessageSender()
+            .performerNameMessage()
+            .blockDataMessage()
+            .replaceBlockTypeMessage()
+            .send();
+    }
 }

@@ -5,5 +5,5 @@ import com.thevoxelbox.voxelsniper.brush.Brush;
 @FunctionalInterface
 public interface BrushCreator {
 
-	Brush create();
+    Brush create();
 }

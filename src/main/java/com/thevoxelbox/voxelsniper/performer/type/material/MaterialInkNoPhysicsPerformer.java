@@ -9,32 +9,32 @@ import org.bukkit.block.data.BlockData;
 
 public class MaterialInkNoPhysicsPerformer extends AbstractPerformer {
 
-	private BlockData blockData;
-	private BlockData replaceBlockData;
+    private BlockData blockData;
+    private BlockData replaceBlockData;
 
-	@Override
-	public void initialize(PerformerSnipe snipe) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		this.blockData = toolkitProperties.getBlockData();
-		this.replaceBlockData = toolkitProperties.getReplaceBlockData();
-	}
+    @Override
+    public void initialize(final PerformerSnipe snipe) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        this.blockData = toolkitProperties.getBlockData();
+        this.replaceBlockData = toolkitProperties.getReplaceBlockData();
+    }
 
-	@Override
-	public void perform(Block block) {
-		BlockData blockData = block.getBlockData();
-		if (blockData.equals(this.replaceBlockData)) {
-			Undo undo = getUndo();
-			undo.put(block);
-			block.setType(this.blockData.getMaterial(), false);
-		}
-	}
+    @Override
+    public void perform(final Block block) {
+        BlockData blockData = block.getBlockData();
+        if (blockData.equals(this.replaceBlockData)) {
+            Undo undo = getUndo();
+            undo.put(block);
+            block.setType(this.blockData.getMaterial(), false);
+        }
+    }
 
-	@Override
-	public void sendInfo(PerformerSnipe snipe) {
-		snipe.createMessageSender()
-			.performerNameMessage()
-			.blockTypeMessage()
-			.replaceBlockDataMessage()
-			.send();
-	}
+    @Override
+    public void sendInfo(final PerformerSnipe snipe) {
+        snipe.createMessageSender()
+            .performerNameMessage()
+            .blockTypeMessage()
+            .replaceBlockDataMessage()
+            .send();
+    }
 }

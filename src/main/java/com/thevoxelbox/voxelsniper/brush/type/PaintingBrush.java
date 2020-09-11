@@ -11,33 +11,33 @@ import org.bukkit.entity.Player;
  */
 public class PaintingBrush extends AbstractBrush {
 
-	/**
-	 * Scroll painting forward.
-	 *
-	 * @param snipe Sniper caller
-	 */
-	@Override
-	public void handleArrowAction(Snipe snipe) {
-		Sniper sniper = snipe.getSniper();
-		Player player = sniper.getPlayer();
-		ArtHelper.paintAuto(player, false);
-	}
+    /**
+     * Scroll painting forward.
+     *
+     * @param snipe Sniper caller
+     */
+    @Override
+    public void handleArrowAction(final Snipe snipe) {
+        Sniper sniper = snipe.getSniper();
+        Player player = sniper.getPlayer();
+        ArtHelper.paintAuto(player, false);
+    }
 
-	/**
-	 * Scroll painting backwards.
-	 *
-	 * @param snipe Sniper caller
-	 */
-	@Override
-	public void handleGunpowderAction(Snipe snipe) {
-		Sniper sniper = snipe.getSniper();
-		Player player = sniper.getPlayer();
-		ArtHelper.paintAuto(player, true);
-	}
+    /**
+     * Scroll painting backwards.
+     *
+     * @param snipe Sniper caller
+     */
+    @Override
+    public void handleGunpowderAction(final Snipe snipe) {
+        Sniper sniper = snipe.getSniper();
+        Player player = sniper.getPlayer();
+        ArtHelper.paintAuto(player, true);
+    }
 
-	@Override
-	public void sendInfo(Snipe snipe) {
-		SnipeMessenger messenger = snipe.createMessenger();
-		messenger.sendBrushNameMessage();
-	}
+    @Override
+    public void sendInfo(final Snipe snipe) {
+        SnipeMessenger messenger = snipe.createMessenger();
+        messenger.sendBrushNameMessage();
+    }
 }

@@ -9,88 +9,88 @@ import org.bukkit.block.BlockFace;
 
 public class VoxelDiscFaceBrush extends AbstractPerformerBrush {
 
-	@Override
-	public void handleArrowAction(Snipe snipe) {
-		Block lastBlock = getLastBlock();
-		Block targetBlock = getTargetBlock();
-		BlockFace face = targetBlock.getFace(lastBlock);
-		if (face == null) {
-			return;
-		}
-		pre(snipe, face, targetBlock);
-	}
+    @Override
+    public void handleArrowAction(final Snipe snipe) {
+        Block lastBlock = getLastBlock();
+        Block targetBlock = getTargetBlock();
+        BlockFace face = targetBlock.getFace(lastBlock);
+        if (face == null) {
+            return;
+        }
+        pre(snipe, face, targetBlock);
+    }
 
-	@Override
-	public void handleGunpowderAction(Snipe snipe) {
-		Block lastBlock = getLastBlock();
-		Block targetBlock = getTargetBlock();
-		BlockFace face = targetBlock.getFace(lastBlock);
-		if (face == null) {
-			return;
-		}
-		pre(snipe, face, lastBlock);
-	}
+    @Override
+    public void handleGunpowderAction(final Snipe snipe) {
+        Block lastBlock = getLastBlock();
+        Block targetBlock = getTargetBlock();
+        BlockFace face = targetBlock.getFace(lastBlock);
+        if (face == null) {
+            return;
+        }
+        pre(snipe, face, lastBlock);
+    }
 
-	private void pre(Snipe snipe, BlockFace blockFace, Block targetBlock) {
-		switch (blockFace) {
-			case NORTH:
-			case SOUTH:
-				discNorthSouth(snipe, targetBlock);
-				break;
-			case EAST:
-			case WEST:
-				discEastWest(snipe, targetBlock);
-				break;
-			case UP:
-			case DOWN:
-				disc(snipe, targetBlock);
-				break;
-			default:
-				break;
-		}
-	}
+    private void pre(final Snipe snipe, final BlockFace blockFace, final Block targetBlock) {
+        switch (blockFace) {
+            case NORTH:
+            case SOUTH:
+                discNorthSouth(snipe, targetBlock);
+                break;
+            case EAST:
+            case WEST:
+                discEastWest(snipe, targetBlock);
+                break;
+            case UP:
+            case DOWN:
+                disc(snipe, targetBlock);
+                break;
+            default:
+                break;
+        }
+    }
 
-	private void discNorthSouth(Snipe snipe, Block targetBlock) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		int brushSize = toolkitProperties.getBrushSize();
-		for (int x = brushSize; x >= -brushSize; x--) {
-			for (int y = brushSize; y >= -brushSize; y--) {
-				this.performer.perform(this.clampY(targetBlock.getX() + x, targetBlock.getY() + y, targetBlock.getZ()));
-			}
-		}
-		Sniper sniper = snipe.getSniper();
-		sniper.storeUndo(this.performer.getUndo());
-	}
+    private void discNorthSouth(final Snipe snipe, final Block targetBlock) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        int brushSize = toolkitProperties.getBrushSize();
+        for (int x = brushSize; x >= -brushSize; x--) {
+            for (int y = brushSize; y >= -brushSize; y--) {
+                this.performer.perform(this.clampY(targetBlock.getX() + x, targetBlock.getY() + y, targetBlock.getZ()));
+            }
+        }
+        Sniper sniper = snipe.getSniper();
+        sniper.storeUndo(this.performer.getUndo());
+    }
 
-	private void discEastWest(Snipe snipe, Block targetBlock) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		int brushSize = toolkitProperties.getBrushSize();
-		for (int x = brushSize; x >= -brushSize; x--) {
-			for (int y = brushSize; y >= -brushSize; y--) {
-				this.performer.perform(this.clampY(targetBlock.getX(), targetBlock.getY() + x, targetBlock.getZ() + y));
-			}
-		}
-		Sniper sniper = snipe.getSniper();
-		sniper.storeUndo(this.performer.getUndo());
-	}
+    private void discEastWest(final Snipe snipe, final Block targetBlock) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        int brushSize = toolkitProperties.getBrushSize();
+        for (int x = brushSize; x >= -brushSize; x--) {
+            for (int y = brushSize; y >= -brushSize; y--) {
+                this.performer.perform(this.clampY(targetBlock.getX(), targetBlock.getY() + x, targetBlock.getZ() + y));
+            }
+        }
+        Sniper sniper = snipe.getSniper();
+        sniper.storeUndo(this.performer.getUndo());
+    }
 
-	private void disc(Snipe snipe, Block targetBlock) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		int brushSize = toolkitProperties.getBrushSize();
-		for (int x = brushSize; x >= -brushSize; x--) {
-			for (int y = brushSize; y >= -brushSize; y--) {
-				this.performer.perform(this.clampY(targetBlock.getX() + x, targetBlock.getY(), targetBlock.getZ() + y));
-			}
-		}
-		Sniper sniper = snipe.getSniper();
-		sniper.storeUndo(this.performer.getUndo());
-	}
+    private void disc(final Snipe snipe, final Block targetBlock) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        int brushSize = toolkitProperties.getBrushSize();
+        for (int x = brushSize; x >= -brushSize; x--) {
+            for (int y = brushSize; y >= -brushSize; y--) {
+                this.performer.perform(this.clampY(targetBlock.getX() + x, targetBlock.getY(), targetBlock.getZ() + y));
+            }
+        }
+        Sniper sniper = snipe.getSniper();
+        sniper.storeUndo(this.performer.getUndo());
+    }
 
-	@Override
-	public void sendInfo(Snipe snipe) {
-		snipe.createMessageSender()
-			.brushNameMessage()
-			.brushSizeMessage()
-			.send();
-	}
+    @Override
+    public void sendInfo(final Snipe snipe) {
+        snipe.createMessageSender()
+            .brushNameMessage()
+            .brushSizeMessage()
+            .send();
+    }
 }

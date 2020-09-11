@@ -5,15 +5,15 @@ import com.thevoxelbox.voxelsniper.sniper.Undo;
 
 public abstract class AbstractPerformer implements Performer {
 
-	private Undo undo;
+    private Undo undo;
 
-	@Override
-	public void initializeUndo() {
-		this.undo = new Undo();
-	}
+    @Override
+    public void initializeUndo() {
+        this.undo = new Undo();
+    }
 
-	@Override
-	public Undo getUndo() {
-		return this.undo;
-	}
+    @Override
+    public Undo getUndo() {
+        return this.undo;
+    }
 }

@@ -5,5 +5,5 @@ import org.bukkit.command.CommandSender;
 
 public interface TabCompleter {
 
-	List<String> complete(CommandSender sender, String[] arguments);
+    List<String> complete(CommandSender sender, String[] arguments);
 }

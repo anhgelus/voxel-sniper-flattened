@@ -6,42 +6,42 @@ import com.thevoxelbox.voxelsniper.util.math.vector.Vector3i;
 
 public class BlockPainter implements Painter {
 
-	private Vector3i center;
-	private BlockSetter blockSetter;
-	private List<Vector3i> shifts = new ArrayList<>();
+    private final Vector3i center;
+    private final BlockSetter blockSetter;
+    private final List<Vector3i> shifts = new ArrayList<>();
 
-	public BlockPainter(Vector3i center, BlockSetter blockSetter) {
-		this.center = center;
-		this.blockSetter = blockSetter;
-	}
+    public BlockPainter(final Vector3i center, final BlockSetter blockSetter) {
+        this.center = center;
+        this.blockSetter = blockSetter;
+    }
 
-	public BlockPainter at(int xShift, int yShift, int zShift) {
-		Vector3i shift = new Vector3i(xShift, yShift, zShift);
-		return at(shift);
-	}
+    public BlockPainter at(final int xShift, final int yShift, final int zShift) {
+        Vector3i shift = new Vector3i(xShift, yShift, zShift);
+        return at(shift);
+    }
 
-	public BlockPainter at(Vector3i shift) {
-		this.shifts.add(shift);
-		return this;
-	}
+    public BlockPainter at(final Vector3i shift) {
+        this.shifts.add(shift);
+        return this;
+    }
 
-	@Override
-	public void paint() {
-		this.shifts.forEach(this::paintBlock);
-	}
+    @Override
+    public void paint() {
+        this.shifts.forEach(this::paintBlock);
+    }
 
-	private void paintBlock(Vector3i shift) {
-		Vector3i position = this.center.plus(shift);
-		this.blockSetter.setBlockAt(position);
-	}
+    private void paintBlock(final Vector3i shift) {
+        Vector3i position = this.center.plus(shift);
+        this.blockSetter.setBlockAt(position);
+    }
 
-	@Override
-	public Vector3i getCenter() {
-		return this.center;
-	}
+    @Override
+    public Vector3i getCenter() {
+        return this.center;
+    }
 
-	@Override
-	public BlockSetter getBlockSetter() {
-		return this.blockSetter;
-	}
+    @Override
+    public BlockSetter getBlockSetter() {
+        return this.blockSetter;
+    }
 }

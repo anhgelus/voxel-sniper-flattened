@@ -9,21 +9,21 @@ import org.jetbrains.annotations.Nullable;
 
 public class BrushRegistry {
 
-	private Map<String, BrushProperties> brushesProperties = new HashMap<>();
+    private final Map<String, BrushProperties> brushesProperties = new HashMap<>();
 
-	public void register(BrushProperties properties) {
-		List<String> aliases = properties.getAliases();
-		for (String alias : aliases) {
-			this.brushesProperties.put(alias, properties);
-		}
-	}
+    public void register(final BrushProperties properties) {
+        List<String> aliases = properties.getAliases();
+        for (final String alias : aliases) {
+            this.brushesProperties.put(alias, properties);
+        }
+    }
 
-	@Nullable
-	public BrushProperties getBrushProperties(String alias) {
-		return this.brushesProperties.get(alias);
-	}
+    @Nullable
+    public BrushProperties getBrushProperties(final String alias) {
+        return this.brushesProperties.get(alias);
+    }
 
-	public Map<String, BrushProperties> getBrushesProperties() {
-		return Collections.unmodifiableMap(this.brushesProperties);
-	}
+    public Map<String, BrushProperties> getBrushesProperties() {
+        return Collections.unmodifiableMap(this.brushesProperties);
+    }
 }

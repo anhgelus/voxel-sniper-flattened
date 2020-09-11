@@ -9,21 +9,21 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerformerRegistry {
 
-	private Map<String, PerformerProperties> performerProperties = new HashMap<>();
+    private final Map<String, PerformerProperties> performerProperties = new HashMap<>();
 
-	public void register(PerformerProperties properties) {
-		List<String> aliases = properties.getAliases();
-		for (String alias : aliases) {
-			this.performerProperties.put(alias, properties);
-		}
-	}
+    public void register(final PerformerProperties properties) {
+        List<String> aliases = properties.getAliases();
+        for (final String alias : aliases) {
+            this.performerProperties.put(alias, properties);
+        }
+    }
 
-	@Nullable
-	public PerformerProperties getPerformerProperties(String alias) {
-		return this.performerProperties.get(alias);
-	}
+    @Nullable
+    public PerformerProperties getPerformerProperties(final String alias) {
+        return this.performerProperties.get(alias);
+    }
 
-	public Map<String, PerformerProperties> getPerformerProperties() {
-		return Collections.unmodifiableMap(this.performerProperties);
-	}
+    public Map<String, PerformerProperties> getPerformerProperties() {
+        return Collections.unmodifiableMap(this.performerProperties);
+    }
 }

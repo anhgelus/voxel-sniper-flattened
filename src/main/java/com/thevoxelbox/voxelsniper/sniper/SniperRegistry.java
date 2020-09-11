@@ -9,25 +9,25 @@ import org.jetbrains.annotations.Nullable;
 
 public class SniperRegistry {
 
-	private Map<UUID, Sniper> snipers = new HashMap<>();
+    private final Map<UUID, Sniper> snipers = new HashMap<>();
 
-	public void register(Sniper sniper) {
-		UUID uuid = sniper.getUuid();
-		this.snipers.put(uuid, sniper);
-	}
+    public void register(final Sniper sniper) {
+        UUID uuid = sniper.getUuid();
+        this.snipers.put(uuid, sniper);
+    }
 
-	@Nullable
-	public Sniper getSniper(Player player) {
-		UUID uuid = player.getUniqueId();
-		return getSniper(uuid);
-	}
+    @Nullable
+    public Sniper getSniper(final Player player) {
+        UUID uuid = player.getUniqueId();
+        return getSniper(uuid);
+    }
 
-	@Nullable
-	public Sniper getSniper(UUID uuid) {
-		return this.snipers.get(uuid);
-	}
+    @Nullable
+    public Sniper getSniper(final UUID uuid) {
+        return this.snipers.get(uuid);
+    }
 
-	public Map<UUID, Sniper> getSnipers() {
-		return Collections.unmodifiableMap(this.snipers);
-	}
+    public Map<UUID, Sniper> getSnipers() {
+        return Collections.unmodifiableMap(this.snipers);
+    }
 }

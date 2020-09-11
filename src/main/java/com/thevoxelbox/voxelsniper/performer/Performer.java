@@ -6,13 +6,13 @@ import org.bukkit.block.Block;
 
 public interface Performer {
 
-	void initialize(PerformerSnipe snipe);
+    void initialize(PerformerSnipe snipe);
 
-	void perform(Block block);
+    void perform(Block block);
 
-	void sendInfo(PerformerSnipe snipe);
+    void sendInfo(PerformerSnipe snipe);
 
-	void initializeUndo();
+    void initializeUndo();
 
-	Undo getUndo();
+    Undo getUndo();
 }

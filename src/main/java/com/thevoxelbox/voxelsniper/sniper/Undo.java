@@ -23,102 +23,102 @@ import org.bukkit.util.Vector;
  */
 public class Undo {
 
-	private Set<Vector> positions = new HashSet<>();
-	private List<BlockState> blockStates = new LinkedList<>();
+    private final Set<Vector> positions = new HashSet<>();
+    private final List<BlockState> blockStates = new LinkedList<>();
 
-	/**
-	 * Adds a Block to the collection.
-	 *
-	 * @param block Block to be added
-	 */
-	public void put(Block block) {
-		Location location = block.getLocation();
-		Vector position = location.toVector();
-		if (this.positions.contains(position)) {
-			return;
-		}
-		this.positions.add(position);
-		BlockState state = block.getState();
-		this.blockStates.add(state);
-	}
+    /**
+     * Adds a Block to the collection.
+     *
+     * @param block Block to be added
+     */
+    public void put(final Block block) {
+        Location location = block.getLocation();
+        Vector position = location.toVector();
+        if (this.positions.contains(position)) {
+            return;
+        }
+        this.positions.add(position);
+        BlockState state = block.getState();
+        this.blockStates.add(state);
+    }
 
-	public boolean isEmpty() {
-		return this.positions.isEmpty();
-	}
+    public boolean isEmpty() {
+        return this.positions.isEmpty();
+    }
 
-	/**
-	 * Get the number of blocks in the collection.
-	 *
-	 * @return size of the Undo collection
-	 */
-	public int getSize() {
-		return this.positions.size();
-	}
+    /**
+     * Get the number of blocks in the collection.
+     *
+     * @return size of the Undo collection
+     */
+    public int getSize() {
+        return this.positions.size();
+    }
 
-	/**
-	 * Set the block states of all recorded blocks back to the state when they
-	 * were inserted.
-	 */
-	public void undo() {
-		for (BlockState blockState : this.blockStates) {
-			blockState.update(true, false);
-			updateSpecialBlocks(blockState);
-		}
-	}
+    /**
+     * Set the block states of all recorded blocks back to the state when they
+     * were inserted.
+     */
+    public void undo() {
+        for (final BlockState blockState : this.blockStates) {
+            blockState.update(true, false);
+            updateSpecialBlocks(blockState);
+        }
+    }
 
-	private void updateSpecialBlocks(BlockState previousState) {
-		Block block = previousState.getBlock();
-		BlockState currentState = block.getState();
-		if (previousState instanceof InventoryHolder && currentState instanceof InventoryHolder) {
-			updateInventoryHolder((InventoryHolder) previousState, (InventoryHolder) currentState);
-		}
-		if (previousState instanceof Chest && currentState instanceof Chest) {
-			updateChest((Chest) previousState, (Chest) currentState);
-		}
-		if (previousState instanceof CreatureSpawner && currentState instanceof CreatureSpawner) {
-			updateCreatureSpawner((CreatureSpawner) previousState, (CreatureSpawner) currentState);
-		}
-		if (previousState instanceof Furnace && currentState instanceof Furnace) {
-			updateFurnace((Furnace) previousState, (Furnace) currentState);
-		}
-		if (previousState instanceof Sign && currentState instanceof Sign) {
-			updateSign((Sign) previousState, (Sign) currentState);
-		}
-		currentState.update();
-	}
+    private void updateSpecialBlocks(final BlockState previousState) {
+        Block block = previousState.getBlock();
+        BlockState currentState = block.getState();
+        if (previousState instanceof InventoryHolder && currentState instanceof InventoryHolder) {
+            updateInventoryHolder((InventoryHolder) previousState, (InventoryHolder) currentState);
+        }
+        if (previousState instanceof Chest && currentState instanceof Chest) {
+            updateChest((Chest) previousState, (Chest) currentState);
+        }
+        if (previousState instanceof CreatureSpawner && currentState instanceof CreatureSpawner) {
+            updateCreatureSpawner((CreatureSpawner) previousState, (CreatureSpawner) currentState);
+        }
+        if (previousState instanceof Furnace && currentState instanceof Furnace) {
+            updateFurnace((Furnace) previousState, (Furnace) currentState);
+        }
+        if (previousState instanceof Sign && currentState instanceof Sign) {
+            updateSign((Sign) previousState, (Sign) currentState);
+        }
+        currentState.update();
+    }
 
-	private void updateInventoryHolder(InventoryHolder previousState, InventoryHolder currentState) {
-		Inventory currentInventory = currentState.getInventory();
-		Inventory previousInventory = previousState.getInventory();
-		ItemStack[] previousContents = previousInventory.getContents();
-		currentInventory.setContents(previousContents);
-	}
+    private void updateInventoryHolder(final InventoryHolder previousState, final InventoryHolder currentState) {
+        Inventory currentInventory = currentState.getInventory();
+        Inventory previousInventory = previousState.getInventory();
+        ItemStack[] previousContents = previousInventory.getContents();
+        currentInventory.setContents(previousContents);
+    }
 
-	private void updateChest(Chest previousState, Chest currentState) {
-		Inventory currentBlockInventory = currentState.getBlockInventory();
-		Inventory previousBlockInventory = previousState.getBlockInventory();
-		ItemStack[] previousBlockContents = previousBlockInventory.getContents();
-		currentBlockInventory.setContents(previousBlockContents);
-		currentState.update();
-	}
+    private void updateChest(final Chest previousState, final Chest currentState) {
+        Inventory currentBlockInventory = currentState.getBlockInventory();
+        Inventory previousBlockInventory = previousState.getBlockInventory();
+        ItemStack[] previousBlockContents = previousBlockInventory.getContents();
+        currentBlockInventory.setContents(previousBlockContents);
+        currentState.update();
+    }
 
-	private void updateCreatureSpawner(CreatureSpawner previousState, CreatureSpawner currentState) {
-		EntityType spawnedType = previousState.getSpawnedType();
-		currentState.setSpawnedType(spawnedType);
-	}
+    private void updateCreatureSpawner(final CreatureSpawner previousState, final CreatureSpawner currentState) {
+        EntityType spawnedType = previousState.getSpawnedType();
+        currentState.setSpawnedType(spawnedType);
+    }
 
-	private void updateFurnace(Furnace previousState, Furnace currentState) {
-		short previousBurnTime = previousState.getBurnTime();
-		currentState.setBurnTime(previousBurnTime);
-		short previousCookTime = previousState.getCookTime();
-		currentState.setCookTime(previousCookTime);
-	}
+    private void updateFurnace(final Furnace previousState, final Furnace currentState) {
+        short previousBurnTime = previousState.getBurnTime();
+        currentState.setBurnTime(previousBurnTime);
+        short previousCookTime = previousState.getCookTime();
+        currentState.setCookTime(previousCookTime);
+    }
 
-	private void updateSign(Sign previousState, Sign currentState) {
-		String[] previousLines = previousState.getLines();
-		for (int index = 0; index < previousLines.length; index++) {
-			String previousLine = previousLines[index];
-			currentState.setLine(index, previousLine);
-		}
-	}
+    private void updateSign(final Sign previousState, final Sign currentState) {
+        String[] previousLines = previousState.getLines();
+        for (int index = 0; index < previousLines.length; index++) {
+            String previousLine = previousLines[index];
+            currentState.setLine(index, previousLine);
+        }
+    }
 }

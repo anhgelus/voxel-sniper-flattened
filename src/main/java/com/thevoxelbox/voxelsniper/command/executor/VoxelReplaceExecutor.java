@@ -22,68 +22,68 @@ import org.bukkit.entity.Player;
 
 public class VoxelReplaceExecutor implements CommandExecutor, TabCompleter {
 
-	private static final List<NamespacedKey> BLOCK_KEYS = Arrays.stream(Material.values())
-		.filter(Material::isBlock)
-		.map(Material::getKey)
-		.collect(Collectors.toList());
+    private static final List<NamespacedKey> BLOCK_KEYS = Arrays.stream(Material.values())
+        .filter(Material::isBlock)
+        .map(Material::getKey)
+        .collect(Collectors.toList());
 
-	private VoxelSniperPlugin plugin;
+    private final VoxelSniperPlugin plugin;
 
-	public VoxelReplaceExecutor(VoxelSniperPlugin plugin) {
-		this.plugin = plugin;
-	}
+    public VoxelReplaceExecutor(final VoxelSniperPlugin plugin) {
+        this.plugin = plugin;
+    }
 
-	@Override
-	public void executeCommand(CommandSender sender, String[] arguments) {
-		SniperRegistry sniperRegistry = this.plugin.getSniperRegistry();
-		Player player = (Player) sender;
-		Sniper sniper = sniperRegistry.getSniper(player);
-		if (sniper == null) {
-			return;
-		}
-		Toolkit toolkit = sniper.getCurrentToolkit();
-		if (toolkit == null) {
-			return;
-		}
-		ToolkitProperties toolkitProperties = toolkit.getProperties();
-		if (toolkitProperties == null) {
-			return;
-		}
-		Messenger messenger = new Messenger(sender);
-		if (arguments.length == 0) {
-			BlockTracer blockTracer = toolkitProperties.createBlockTracer(player);
-			Block targetBlock = blockTracer.getTargetBlock();
-			if (targetBlock != null) {
-				Material type = targetBlock.getType();
-				toolkitProperties.setReplaceBlockType(type);
-				messenger.sendReplaceBlockTypeMessage(type);
-			}
-			return;
-		}
-		Material material = Material.matchMaterial(arguments[0]);
-		if (material != null) {
-			if (material.isBlock()) {
-				toolkitProperties.setReplaceBlockType(material);
-				messenger.sendReplaceBlockTypeMessage(material);
-			} else {
-				sender.sendMessage(ChatColor.RED + "You have entered an invalid Item ID.");
-			}
-		}
-	}
+    @Override
+    public void executeCommand(final CommandSender sender, final String[] arguments) {
+        SniperRegistry sniperRegistry = this.plugin.getSniperRegistry();
+        Player player = (Player) sender;
+        Sniper sniper = sniperRegistry.getSniper(player);
+        if (sniper == null) {
+            return;
+        }
+        Toolkit toolkit = sniper.getCurrentToolkit();
+        if (toolkit == null) {
+            return;
+        }
+        ToolkitProperties toolkitProperties = toolkit.getProperties();
+        if (toolkitProperties == null) {
+            return;
+        }
+        Messenger messenger = new Messenger(sender);
+        if (arguments.length == 0) {
+            BlockTracer blockTracer = toolkitProperties.createBlockTracer(player);
+            Block targetBlock = blockTracer.getTargetBlock();
+            if (targetBlock != null) {
+                Material type = targetBlock.getType();
+                toolkitProperties.setReplaceBlockType(type);
+                messenger.sendReplaceBlockTypeMessage(type);
+            }
+            return;
+        }
+        Material material = Material.matchMaterial(arguments[0]);
+        if (material != null) {
+            if (material.isBlock()) {
+                toolkitProperties.setReplaceBlockType(material);
+                messenger.sendReplaceBlockTypeMessage(material);
+            } else {
+                sender.sendMessage(ChatColor.RED + "You have entered an invalid Item ID.");
+            }
+        }
+    }
 
-	@Override
-	public List<String> complete(CommandSender sender, String[] arguments) {
-		if (arguments.length == 1) {
-			String argument = arguments[0];
-			String argumentLowered = argument.toLowerCase();
-			return BLOCK_KEYS.stream()
-				.filter(namespacedKey -> {
-					String key = namespacedKey.getKey();
-					return key.startsWith(argumentLowered);
-				})
-				.map(NamespacedKey::toString)
-				.collect(Collectors.toList());
-		}
-		return Collections.emptyList();
-	}
+    @Override
+    public List<String> complete(final CommandSender sender, final String[] arguments) {
+        if (arguments.length == 1) {
+            String argument = arguments[0];
+            String argumentLowered = argument.toLowerCase();
+            return BLOCK_KEYS.stream()
+                .filter(namespacedKey -> {
+                    String key = namespacedKey.getKey();
+                    return key.startsWith(argumentLowered);
+                })
+                .map(NamespacedKey::toString)
+                .collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
 }

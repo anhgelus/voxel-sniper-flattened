@@ -9,31 +9,31 @@ import org.bukkit.block.Block;
 
 public class MaterialMaterialNoPhysicsPerformer extends AbstractPerformer {
 
-	private Material material;
-	private Material replaceMaterial;
+    private Material material;
+    private Material replaceMaterial;
 
-	@Override
-	public void initialize(PerformerSnipe snipe) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		this.material = toolkitProperties.getBlockType();
-		this.replaceMaterial = toolkitProperties.getReplaceBlockType();
-	}
+    @Override
+    public void initialize(final PerformerSnipe snipe) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        this.material = toolkitProperties.getBlockType();
+        this.replaceMaterial = toolkitProperties.getReplaceBlockType();
+    }
 
-	@Override
-	public void perform(Block block) {
-		if (block.getType() == this.replaceMaterial) {
-			Undo undo = getUndo();
-			undo.put(block);
-			block.setType(this.material, false);
-		}
-	}
+    @Override
+    public void perform(final Block block) {
+        if (block.getType() == this.replaceMaterial) {
+            Undo undo = getUndo();
+            undo.put(block);
+            block.setType(this.material, false);
+        }
+    }
 
-	@Override
-	public void sendInfo(PerformerSnipe snipe) {
-		snipe.createMessageSender()
-			.performerNameMessage()
-			.blockTypeMessage()
-			.replaceBlockTypeMessage()
-			.send();
-	}
+    @Override
+    public void sendInfo(final PerformerSnipe snipe) {
+        snipe.createMessageSender()
+            .performerNameMessage()
+            .blockTypeMessage()
+            .replaceBlockTypeMessage()
+            .send();
+    }
 }

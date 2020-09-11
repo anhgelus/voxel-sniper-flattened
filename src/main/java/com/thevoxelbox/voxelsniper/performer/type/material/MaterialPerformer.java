@@ -9,28 +9,28 @@ import org.bukkit.block.Block;
 
 public class MaterialPerformer extends AbstractPerformer {
 
-	private Material material;
+    private Material material;
 
-	@Override
-	public void initialize(PerformerSnipe snipe) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		this.material = toolkitProperties.getBlockType();
-	}
+    @Override
+    public void initialize(final PerformerSnipe snipe) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        this.material = toolkitProperties.getBlockType();
+    }
 
-	@Override
-	public void perform(Block block) {
-		if (block.getType() != this.material) {
-			Undo undo = getUndo();
-			undo.put(block);
-			block.setType(this.material);
-		}
-	}
+    @Override
+    public void perform(final Block block) {
+        if (block.getType() != this.material) {
+            Undo undo = getUndo();
+            undo.put(block);
+            block.setType(this.material);
+        }
+    }
 
-	@Override
-	public void sendInfo(PerformerSnipe snipe) {
-		snipe.createMessageSender()
-			.performerNameMessage()
-			.blockTypeMessage()
-			.send();
-	}
+    @Override
+    public void sendInfo(final PerformerSnipe snipe) {
+        snipe.createMessageSender()
+            .performerNameMessage()
+            .blockTypeMessage()
+            .send();
+    }
 }

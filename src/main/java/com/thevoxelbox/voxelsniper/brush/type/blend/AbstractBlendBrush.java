@@ -14,73 +14,73 @@ import org.bukkit.block.Block;
 
 public abstract class AbstractBlendBrush extends AbstractBrush {
 
-	private boolean airExcluded = true;
-	private boolean waterExcluded = true;
+    private boolean airExcluded = true;
+    private boolean waterExcluded = true;
 
-	@Override
-	public void handleCommand(String[] parameters, Snipe snipe) {
-		SnipeMessenger messenger = snipe.createMessenger();
-		for (String parameter : parameters) {
-			if (parameter.equalsIgnoreCase("water")) {
-				this.waterExcluded = !this.waterExcluded;
-				messenger.sendMessage(ChatColor.AQUA + "Water Mode: " + (this.waterExcluded ? "exclude" : "include"));
-			}
-		}
-	}
+    @Override
+    public void handleCommand(final String[] parameters, final Snipe snipe) {
+        SnipeMessenger messenger = snipe.createMessenger();
+        for (final String parameter : parameters) {
+            if (parameter.equalsIgnoreCase("water")) {
+                this.waterExcluded = !this.waterExcluded;
+                messenger.sendMessage(ChatColor.AQUA + "Water Mode: " + (this.waterExcluded ? "exclude" : "include"));
+            }
+        }
+    }
 
-	@Override
-	public void handleArrowAction(Snipe snipe) {
-		this.airExcluded = false;
-		blend(snipe);
-	}
+    @Override
+    public void handleArrowAction(final Snipe snipe) {
+        this.airExcluded = false;
+        blend(snipe);
+    }
 
-	@Override
-	public void handleGunpowderAction(Snipe snipe) {
-		this.airExcluded = true;
-		blend(snipe);
-	}
+    @Override
+    public void handleGunpowderAction(final Snipe snipe) {
+        this.airExcluded = true;
+        blend(snipe);
+    }
 
-	public abstract void blend(Snipe snipe);
+    public abstract void blend(Snipe snipe);
 
-	protected void setBlocks(Map<Vector3i, Material> materials, Undo undo) {
-		for (Entry<Vector3i, Material> entry : materials.entrySet()) {
-			Vector3i position = entry.getKey();
-			Material material = entry.getValue();
-			if (checkExclusions(material)) {
-				Material currentBlockType = getBlockType(position);
-				if (currentBlockType != material) {
-					Block clamped = clampY(position);
-					undo.put(clamped);
-				}
-				setBlockType(position, material);
-			}
-		}
-	}
+    protected void setBlocks(final Map<Vector3i, Material> materials, final Undo undo) {
+        for (final Entry<Vector3i, Material> entry : materials.entrySet()) {
+            Vector3i position = entry.getKey();
+            Material material = entry.getValue();
+            if (checkExclusions(material)) {
+                Material currentBlockType = getBlockType(position);
+                if (currentBlockType != material) {
+                    Block clamped = clampY(position);
+                    undo.put(clamped);
+                }
+                setBlockType(position, material);
+            }
+        }
+    }
 
-	protected CommonMaterial findCommonMaterial(Map<Material, Integer> materialsFrequencies) {
-		CommonMaterial commonMaterial = new CommonMaterial();
-		for (Entry<Material, Integer> entry : materialsFrequencies.entrySet()) {
-			Material material = entry.getKey();
-			int frequency = entry.getValue();
-			if (frequency > commonMaterial.getFrequency() && checkExclusions(material)) {
-				commonMaterial.setMaterial(material);
-				commonMaterial.setFrequency(frequency);
-			}
-		}
-		return commonMaterial;
-	}
+    protected CommonMaterial findCommonMaterial(final Map<Material, Integer> materialsFrequencies) {
+        CommonMaterial commonMaterial = new CommonMaterial();
+        for (final Entry<Material, Integer> entry : materialsFrequencies.entrySet()) {
+            Material material = entry.getKey();
+            int frequency = entry.getValue();
+            if (frequency > commonMaterial.getFrequency() && checkExclusions(material)) {
+                commonMaterial.setMaterial(material);
+                commonMaterial.setFrequency(frequency);
+            }
+        }
+        return commonMaterial;
+    }
 
-	private boolean checkExclusions(Material material) {
-		return (!this.airExcluded || !Materials.isEmpty(material)) && (!this.waterExcluded || material != Material.WATER);
-	}
+    private boolean checkExclusions(final Material material) {
+        return (!this.airExcluded || !Materials.isEmpty(material)) && (!this.waterExcluded || material != Material.WATER);
+    }
 
-	@Override
-	public void sendInfo(Snipe snipe) {
-		snipe.createMessageSender()
-			.brushNameMessage()
-			.brushSizeMessage()
-			.blockTypeMessage()
-			.message(ChatColor.BLUE + "Water Mode: " + (this.waterExcluded ? "exclude" : "include"))
-			.send();
-	}
+    @Override
+    public void sendInfo(final Snipe snipe) {
+        snipe.createMessageSender()
+            .brushNameMessage()
+            .brushSizeMessage()
+            .blockTypeMessage()
+            .message(ChatColor.BLUE + "Water Mode: " + (this.waterExcluded ? "exclude" : "include"))
+            .send();
+    }
 }

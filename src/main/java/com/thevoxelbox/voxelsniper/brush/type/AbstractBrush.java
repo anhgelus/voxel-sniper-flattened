@@ -14,122 +14,122 @@ import org.bukkit.entity.Player;
 
 public abstract class AbstractBrush implements Brush {
 
-	protected static final int CHUNK_SIZE = 16;
+    protected static final int CHUNK_SIZE = 16;
 
-	private Block targetBlock;
-	private Block lastBlock;
+    private Block targetBlock;
+    private Block lastBlock;
 
-	@Override
-	public void handleCommand(String[] parameters, Snipe snipe) {
-		Sniper sniper = snipe.getSniper();
-		Player player = sniper.getPlayer();
-		player.sendMessage(ChatColor.RED + "This brush does not accept additional parameters.");
-	}
+    @Override
+    public void handleCommand(final String[] parameters, final Snipe snipe) {
+        Sniper sniper = snipe.getSniper();
+        Player player = sniper.getPlayer();
+        player.sendMessage(ChatColor.RED + "This brush does not accept additional parameters.");
+    }
 
-	@Override
-	public void perform(Snipe snipe, ToolAction action, Block targetBlock, Block lastBlock) {
-		this.targetBlock = targetBlock;
-		this.lastBlock = lastBlock;
-		if (action == ToolAction.ARROW) {
-			handleArrowAction(snipe);
-		} else if (action == ToolAction.GUNPOWDER) {
-			handleGunpowderAction(snipe);
-		}
-	}
+    @Override
+    public void perform(final Snipe snipe, final ToolAction action, final Block targetBlock, final Block lastBlock) {
+        this.targetBlock = targetBlock;
+        this.lastBlock = lastBlock;
+        if (action == ToolAction.ARROW) {
+            handleArrowAction(snipe);
+        } else if (action == ToolAction.GUNPOWDER) {
+            handleGunpowderAction(snipe);
+        }
+    }
 
-	public Block clampY(Vector3i position) {
-		int x = position.getX();
-		int y = position.getY();
-		int z = position.getZ();
-		return clampY(x, y, z);
-	}
+    public Block clampY(final Vector3i position) {
+        int x = position.getX();
+        int y = position.getY();
+        int z = position.getZ();
+        return clampY(x, y, z);
+    }
 
-	public Block clampY(int x, int y, int z) {
-		int clampedY = y;
-		World world = this.targetBlock.getWorld();
-		if (clampedY < 0) {
-			clampedY = 0;
-		} else {
-			int maxHeight = world.getMaxHeight();
-			if (clampedY > maxHeight) {
-				clampedY = maxHeight;
-			}
-		}
-		return getBlock(x, clampedY, z);
-	}
+    public Block clampY(final int x, final int y, final int z) {
+        int clampedY = y;
+        World world = this.targetBlock.getWorld();
+        if (clampedY < 0) {
+            clampedY = 0;
+        } else {
+            int maxHeight = world.getMaxHeight();
+            if (clampedY > maxHeight) {
+                clampedY = maxHeight;
+            }
+        }
+        return getBlock(x, clampedY, z);
+    }
 
-	public Material getBlockType(Vector3i position) {
-		int x = position.getX();
-		int y = position.getY();
-		int z = position.getZ();
-		return getBlockType(x, y, z);
-	}
+    public Material getBlockType(final Vector3i position) {
+        int x = position.getX();
+        int y = position.getY();
+        int z = position.getZ();
+        return getBlockType(x, y, z);
+    }
 
-	public Material getBlockType(int x, int y, int z) {
-		Block block = getBlock(x, y, z);
-		return block.getType();
-	}
+    public Material getBlockType(final int x, final int y, final int z) {
+        Block block = getBlock(x, y, z);
+        return block.getType();
+    }
 
-	public BlockData getBlockData(Vector3i position) {
-		int x = position.getX();
-		int y = position.getY();
-		int z = position.getZ();
-		return getBlockData(x, y, z);
-	}
+    public BlockData getBlockData(final Vector3i position) {
+        int x = position.getX();
+        int y = position.getY();
+        int z = position.getZ();
+        return getBlockData(x, y, z);
+    }
 
-	public BlockData getBlockData(int x, int y, int z) {
-		Block block = getBlock(x, y, z);
-		return block.getBlockData();
-	}
+    public BlockData getBlockData(final int x, final int y, final int z) {
+        Block block = getBlock(x, y, z);
+        return block.getBlockData();
+    }
 
-	public void setBlockType(Vector3i position, Material type) {
-		int x = position.getX();
-		int y = position.getY();
-		int z = position.getZ();
-		setBlockType(x, y, z, type);
-	}
+    public void setBlockType(final Vector3i position, final Material type) {
+        int x = position.getX();
+        int y = position.getY();
+        int z = position.getZ();
+        setBlockType(x, y, z, type);
+    }
 
-	public void setBlockType(int x, int y, int z, Material type) {
-		Block block = getBlock(x, y, z);
-		block.setType(type);
-	}
+    public void setBlockType(final int x, final int y, final int z, final Material type) {
+        Block block = getBlock(x, y, z);
+        block.setType(type);
+    }
 
-	public void setBlockData(Vector3i position, BlockData blockData) {
-		int x = position.getX();
-		int y = position.getY();
-		int z = position.getZ();
-		setBlockData(x, y, z, blockData);
-	}
+    public void setBlockData(final Vector3i position, final BlockData blockData) {
+        int x = position.getX();
+        int y = position.getY();
+        int z = position.getZ();
+        setBlockData(x, y, z, blockData);
+    }
 
-	public void setBlockData(int x, int y, int z, BlockData blockData) {
-		Block block = getBlock(x, y, z);
-		block.setBlockData(blockData);
-	}
+    public void setBlockData(final int x, final int y, final int z, final BlockData blockData) {
+        Block block = getBlock(x, y, z);
+        block.setBlockData(blockData);
+    }
 
-	public Block getBlock(Vector3i position) {
-		int x = position.getX();
-		int y = position.getY();
-		int z = position.getZ();
-		return getBlock(x, y, z);
-	}
+    public Block getBlock(final Vector3i position) {
+        int x = position.getX();
+        int y = position.getY();
+        int z = position.getZ();
+        return getBlock(x, y, z);
+    }
 
-	public Block getBlock(int x, int y, int z) {
-		World world = getWorld();
-		return world.getBlockAt(x, y, z);
-	}
+    public Block getBlock(final int x, final int y, final int z) {
+        World world = getWorld();
+        return world.getBlockAt(x, y, z);
+    }
 
-	public World getWorld() {
-		return this.targetBlock.getWorld();
-	}
+    public World getWorld() {
+        return this.targetBlock.getWorld();
+    }
 
-	public Block getTargetBlock() {
-		return this.targetBlock;
-	}
+    public Block getTargetBlock() {
+        return this.targetBlock;
+    }
 
-	/**
-	 * @return Block before target Block.
-	 */
-	public Block getLastBlock() {
-		return this.lastBlock;
-	}
+    /**
+     * @return Block before target Block.
+     */
+    public Block getLastBlock() {
+        return this.lastBlock;
+    }
 }

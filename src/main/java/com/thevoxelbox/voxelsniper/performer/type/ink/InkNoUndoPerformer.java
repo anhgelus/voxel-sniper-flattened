@@ -8,27 +8,27 @@ import org.bukkit.block.data.BlockData;
 
 public class InkNoUndoPerformer extends AbstractPerformer {
 
-	private BlockData blockData;
+    private BlockData blockData;
 
-	@Override
-	public void initialize(PerformerSnipe snipe) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		this.blockData = toolkitProperties.getBlockData();
-	}
+    @Override
+    public void initialize(final PerformerSnipe snipe) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        this.blockData = toolkitProperties.getBlockData();
+    }
 
-	@Override
-	public void perform(Block block) {
-		BlockData blockData = block.getBlockData();
-		if (!blockData.equals(this.blockData)) {
-			block.setBlockData(this.blockData);
-		}
-	}
+    @Override
+    public void perform(final Block block) {
+        BlockData blockData = block.getBlockData();
+        if (!blockData.equals(this.blockData)) {
+            block.setBlockData(this.blockData);
+        }
+    }
 
-	@Override
-	public void sendInfo(PerformerSnipe snipe) {
-		snipe.createMessageSender()
-			.performerNameMessage()
-			.blockDataMessage()
-			.send();
-	}
+    @Override
+    public void sendInfo(final PerformerSnipe snipe) {
+        snipe.createMessageSender()
+            .performerNameMessage()
+            .blockDataMessage()
+            .send();
+    }
 }

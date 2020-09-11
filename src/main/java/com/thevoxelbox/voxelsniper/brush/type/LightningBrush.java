@@ -8,24 +8,24 @@ import org.bukkit.block.Block;
 
 public class LightningBrush extends AbstractBrush {
 
-	@Override
-	public void handleArrowAction(Snipe snipe) {
-		World world = getWorld();
-		Block targetBlock = getTargetBlock();
-		world.strikeLightning(targetBlock.getLocation());
-	}
+    @Override
+    public void handleArrowAction(final Snipe snipe) {
+        World world = getWorld();
+        Block targetBlock = getTargetBlock();
+        world.strikeLightning(targetBlock.getLocation());
+    }
 
-	@Override
-	public void handleGunpowderAction(Snipe snipe) {
-		World world = getWorld();
-		Block targetBlock = getTargetBlock();
-		world.strikeLightning(targetBlock.getLocation());
-	}
+    @Override
+    public void handleGunpowderAction(final Snipe snipe) {
+        World world = getWorld();
+        Block targetBlock = getTargetBlock();
+        world.strikeLightning(targetBlock.getLocation());
+    }
 
-	@Override
-	public void sendInfo(Snipe snipe) {
-		SnipeMessenger messenger = snipe.createMessenger();
-		messenger.sendBrushNameMessage();
-		messenger.sendMessage(ChatColor.LIGHT_PURPLE + "Lightning Brush! Please use in moderation.");
-	}
+    @Override
+    public void sendInfo(final Snipe snipe) {
+        SnipeMessenger messenger = snipe.createMessenger();
+        messenger.sendBrushNameMessage();
+        messenger.sendMessage(ChatColor.LIGHT_PURPLE + "Lightning Brush! Please use in moderation.");
+    }
 }

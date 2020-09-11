@@ -10,29 +10,29 @@ import org.bukkit.entity.Player;
 
 public class UndoExecutor implements CommandExecutor {
 
-	private VoxelSniperPlugin plugin;
+    private final VoxelSniperPlugin plugin;
 
-	public UndoExecutor(VoxelSniperPlugin plugin) {
-		this.plugin = plugin;
-	}
+    public UndoExecutor(final VoxelSniperPlugin plugin) {
+        this.plugin = plugin;
+    }
 
-	@Override
-	public void executeCommand(CommandSender sender, String[] arguments) {
-		SniperRegistry sniperRegistry = this.plugin.getSniperRegistry();
-		Player player = (Player) sender;
-		Sniper sniper = sniperRegistry.getSniper(player);
-		if (sniper == null) {
-			return;
-		}
-		if (arguments.length == 1) {
-			Integer amount = NumericParser.parseInteger(arguments[0]);
-			if (amount == null) {
-				sender.sendMessage("Error while parsing amount of undo. Number format exception.");
-				return;
-			}
-			sniper.undo(sender, amount);
-			return;
-		}
-		sniper.undo(sender, 1);
-	}
+    @Override
+    public void executeCommand(final CommandSender sender, final String[] arguments) {
+        SniperRegistry sniperRegistry = this.plugin.getSniperRegistry();
+        Player player = (Player) sender;
+        Sniper sniper = sniperRegistry.getSniper(player);
+        if (sniper == null) {
+            return;
+        }
+        if (arguments.length == 1) {
+            Integer amount = NumericParser.parseInteger(arguments[0]);
+            if (amount == null) {
+                sender.sendMessage("Error while parsing amount of undo. Number format exception.");
+                return;
+            }
+            sniper.undo(sender, amount);
+            return;
+        }
+        sniper.undo(sender, 1);
+    }
 }

@@ -5,24 +5,24 @@ import org.jetbrains.annotations.Nullable;
 
 class CommonMaterial {
 
-	@Nullable
-	private Material material;
-	private int frequency;
+    @Nullable
+    private Material material;
+    private int frequency;
 
-	@Nullable
-	public Material getMaterial() {
-		return this.material;
-	}
+    @Nullable
+    public Material getMaterial() {
+        return this.material;
+    }
 
-	public void setMaterial(@Nullable Material material) {
-		this.material = material;
-	}
+    public void setMaterial(@Nullable final Material material) {
+        this.material = material;
+    }
 
-	public int getFrequency() {
-		return this.frequency;
-	}
+    public int getFrequency() {
+        return this.frequency;
+    }
 
-	public void setFrequency(int frequency) {
-		this.frequency = frequency;
-	}
+    public void setFrequency(final int frequency) {
+        this.frequency = frequency;
+    }
 }

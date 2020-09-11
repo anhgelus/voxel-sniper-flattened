@@ -9,33 +9,33 @@ import org.bukkit.block.data.BlockData;
 
 public class ComboInkPerformer extends AbstractPerformer {
 
-	private BlockData blockData;
-	private BlockData replaceBlockData;
+    private BlockData blockData;
+    private BlockData replaceBlockData;
 
-	@Override
-	public void initialize(PerformerSnipe snipe) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		this.blockData = toolkitProperties.getBlockData();
-		this.replaceBlockData = toolkitProperties.getReplaceBlockData();
-	}
+    @Override
+    public void initialize(final PerformerSnipe snipe) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        this.blockData = toolkitProperties.getBlockData();
+        this.replaceBlockData = toolkitProperties.getReplaceBlockData();
+    }
 
-	@Override
-	public void perform(Block block) {
-		BlockData blockData = block.getBlockData();
-		if (blockData.equals(this.replaceBlockData)) {
-			Undo undo = getUndo();
-			undo.put(block);
-			block.setBlockData(this.blockData);
-		}
-	}
+    @Override
+    public void perform(final Block block) {
+        BlockData blockData = block.getBlockData();
+        if (blockData.equals(this.replaceBlockData)) {
+            Undo undo = getUndo();
+            undo.put(block);
+            block.setBlockData(this.blockData);
+        }
+    }
 
-	@Override
-	public void sendInfo(PerformerSnipe snipe) {
-		snipe.createMessageSender()
-			.performerNameMessage()
-			.blockTypeMessage()
-			.blockDataMessage()
-			.replaceBlockDataMessage()
-			.send();
-	}
+    @Override
+    public void sendInfo(final PerformerSnipe snipe) {
+        snipe.createMessageSender()
+            .performerNameMessage()
+            .blockTypeMessage()
+            .blockDataMessage()
+            .replaceBlockDataMessage()
+            .send();
+    }
 }

@@ -8,35 +8,35 @@ import org.bukkit.block.Block;
 
 public class VoxelDiscBrush extends AbstractPerformerBrush {
 
-	@Override
-	public void handleArrowAction(Snipe snipe) {
-		Block targetBlock = getTargetBlock();
-		disc(snipe, targetBlock);
-	}
+    @Override
+    public void handleArrowAction(final Snipe snipe) {
+        Block targetBlock = getTargetBlock();
+        disc(snipe, targetBlock);
+    }
 
-	@Override
-	public void handleGunpowderAction(Snipe snipe) {
-		Block lastBlock = getLastBlock();
-		disc(snipe, lastBlock);
-	}
+    @Override
+    public void handleGunpowderAction(final Snipe snipe) {
+        Block lastBlock = getLastBlock();
+        disc(snipe, lastBlock);
+    }
 
-	private void disc(Snipe snipe, Block targetBlock) {
-		ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
-		int brushSize = toolkitProperties.getBrushSize();
-		for (int x = brushSize; x >= -toolkitProperties.getBrushSize(); x--) {
-			for (int z = toolkitProperties.getBrushSize(); z >= -toolkitProperties.getBrushSize(); z--) {
-				this.performer.perform(targetBlock.getRelative(x, 0, z));
-			}
-		}
-		Sniper sniper = snipe.getSniper();
-		sniper.storeUndo(this.performer.getUndo());
-	}
+    private void disc(final Snipe snipe, final Block targetBlock) {
+        ToolkitProperties toolkitProperties = snipe.getToolkitProperties();
+        int brushSize = toolkitProperties.getBrushSize();
+        for (int x = brushSize; x >= -toolkitProperties.getBrushSize(); x--) {
+            for (int z = toolkitProperties.getBrushSize(); z >= -toolkitProperties.getBrushSize(); z--) {
+                this.performer.perform(targetBlock.getRelative(x, 0, z));
+            }
+        }
+        Sniper sniper = snipe.getSniper();
+        sniper.storeUndo(this.performer.getUndo());
+    }
 
-	@Override
-	public void sendInfo(Snipe snipe) {
-		snipe.createMessageSender()
-			.brushNameMessage()
-			.brushSizeMessage()
-			.send();
-	}
+    @Override
+    public void sendInfo(final Snipe snipe) {
+        snipe.createMessageSender()
+            .brushNameMessage()
+            .brushSizeMessage()
+            .send();
+    }
 }

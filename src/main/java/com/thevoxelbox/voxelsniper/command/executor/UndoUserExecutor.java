@@ -11,24 +11,24 @@ import org.bukkit.entity.Player;
 
 public class UndoUserExecutor implements CommandExecutor {
 
-	private VoxelSniperPlugin plugin;
+    private final VoxelSniperPlugin plugin;
 
-	public UndoUserExecutor(VoxelSniperPlugin plugin) {
-		this.plugin = plugin;
-	}
+    public UndoUserExecutor(final VoxelSniperPlugin plugin) {
+        this.plugin = plugin;
+    }
 
-	@Override
-	public void executeCommand(CommandSender sender, String[] arguments) {
-		SniperRegistry sniperRegistry = this.plugin.getSniperRegistry();
-		Player player = Bukkit.getPlayer(arguments[0]);
-		if (player == null) {
-			sender.sendMessage(ChatColor.GREEN + "Player not found.");
-			return;
-		}
-		Sniper sniper = sniperRegistry.getSniper(player);
-		if (sniper == null) {
-			return;
-		}
-		sniper.undo(sender, 1);
-	}
+    @Override
+    public void executeCommand(final CommandSender sender, final String[] arguments) {
+        SniperRegistry sniperRegistry = this.plugin.getSniperRegistry();
+        Player player = Bukkit.getPlayer(arguments[0]);
+        if (player == null) {
+            sender.sendMessage(ChatColor.GREEN + "Player not found.");
+            return;
+        }
+        Sniper sniper = sniperRegistry.getSniper(player);
+        if (sniper == null) {
+            return;
+        }
+        sniper.undo(sender, 1);
+    }
 }

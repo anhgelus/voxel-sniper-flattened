@@ -14,35 +14,35 @@ import org.bukkit.entity.Player;
 
 public class VoxelHeightExecutor implements CommandExecutor {
 
-	private VoxelSniperPlugin plugin;
+    private final VoxelSniperPlugin plugin;
 
-	public VoxelHeightExecutor(VoxelSniperPlugin plugin) {
-		this.plugin = plugin;
-	}
+    public VoxelHeightExecutor(final VoxelSniperPlugin plugin) {
+        this.plugin = plugin;
+    }
 
-	@Override
-	public void executeCommand(CommandSender sender, String[] arguments) {
-		SniperRegistry sniperRegistry = this.plugin.getSniperRegistry();
-		Player player = (Player) sender;
-		Sniper sniper = sniperRegistry.getSniper(player);
-		if (sniper == null) {
-			return;
-		}
-		Toolkit toolkit = sniper.getCurrentToolkit();
-		if (toolkit == null) {
-			return;
-		}
-		ToolkitProperties toolkitProperties = toolkit.getProperties();
-		if (toolkitProperties == null) {
-			return;
-		}
-		Integer height = NumericParser.parseInteger(arguments[0]);
-		if (height == null) {
-			sender.sendMessage(ChatColor.RED + "Invalid input.");
-			return;
-		}
-		toolkitProperties.setVoxelHeight(height);
-		Messenger messenger = new Messenger(sender);
-		messenger.sendVoxelHeightMessage(height);
-	}
+    @Override
+    public void executeCommand(final CommandSender sender, final String[] arguments) {
+        SniperRegistry sniperRegistry = this.plugin.getSniperRegistry();
+        Player player = (Player) sender;
+        Sniper sniper = sniperRegistry.getSniper(player);
+        if (sniper == null) {
+            return;
+        }
+        Toolkit toolkit = sniper.getCurrentToolkit();
+        if (toolkit == null) {
+            return;
+        }
+        ToolkitProperties toolkitProperties = toolkit.getProperties();
+        if (toolkitProperties == null) {
+            return;
+        }
+        Integer height = NumericParser.parseInteger(arguments[0]);
+        if (height == null) {
+            sender.sendMessage(ChatColor.RED + "Invalid input.");
+            return;
+        }
+        toolkitProperties.setVoxelHeight(height);
+        Messenger messenger = new Messenger(sender);
+        messenger.sendVoxelHeightMessage(height);
+    }
 }
