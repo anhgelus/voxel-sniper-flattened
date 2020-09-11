@@ -2,7 +2,7 @@ import net.mcparkour.migle.attributes.ApiVersion
 
 plugins {
 	java
-	id("net.mcparkour.migle.migle-bukkit") version "1.1.1"
+	id("net.mcparkour.migle.migle-bukkit") version "1.1.2"
 }
 
 java {
@@ -22,7 +22,7 @@ repositories {
 
 dependencies {
 	compileOnly("org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT")
-	compileOnly("org.jetbrains:annotations:18.0.0")
+	compileOnly("org.jetbrains:annotations:20.1.0")
 }
 
 migleBukkit {
